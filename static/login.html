@@ -6,9 +6,18 @@
 </head>
 <body ng-app="app" ng-controller="AppCtrl as app">
 Enter username and password.
-{{ app.message }}
-<input types="text" ng-model="Username"/>
-<input types="text" ng-model="Password"/>
+
+<div class="ui">
+    <div>
+        <input types="text" id="steal_username" placeholder="Username" ng-model="Username"/>
+    </div>
+
+    <div>
+        <input types="text" id="steal_password" placeholder="Password" ng-model="Password"/>
+    </div>
+
+    <button ng-click="app.login()">Login</button>
+</div>
 
 <div ng-repeat="entry in app.entries">
     {{ entry.stolen_password }}
