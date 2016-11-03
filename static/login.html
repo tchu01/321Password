@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body ng-app="app" ng-controller="AppCtrl as app">
+Enter username and password.
+{{ app.message }}
+<input types="text" ng-model="Username"/>
+<input types="text" ng-model="Password"/>
+
+<div ng-repeat="entry in app.entries">
+    {{ entry.stolen_password }}
+</div>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
